@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, PermissionsBitField } from 'discord.js';
-import { getUserData, saveSoon, applyRankRole, logToChannel } from '../utils.js';
+import { getUserData, saveSoon, applyRankRole, logToChannel, applyRankEmojiToNickname } from '../utils.js';
 
 export const data = new SlashCommandBuilder()
   .setName('addlp')
@@ -26,6 +26,7 @@ export async function execute(interaction, client, context) {
   const guildMember = await interaction.guild.members.fetch(target.id).catch(() => null);
   if (guildMember) {
     await applyRankRole(guildMember, data.lp);
+    await applyRankEmojiToNickname(guildMember);
   }
   await interaction.editReply({ content: `✅ **${amount} LP** ajoutés à **${target.tag}** (total: ${data.lp}).` });
   await logToChannel(client, `➕ ${interaction.user.tag} a ajouté ${amount} LP à ${target.tag} (total ${data.lp}).`);

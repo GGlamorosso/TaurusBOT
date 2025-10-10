@@ -316,6 +316,53 @@ export function getRankNameFromLp(lp) {
   return currentRank;
 }
 
+// Map rank roles to emojis (customize as you like)
+const RANK_ROLE_TO_EMOJI = {
+  [RANK_LEGENDE_ROLE_ID]: '💎',
+  [RANK_PARRAIN_ROLE_ID]: '👑',
+  [RANK_BRASDROIT_ROLE_ID]: '⭐⭐⭐',
+  [RANK_CAPTAIN_ROLE_ID]: '⭐⭐',
+  [RANK_MEMBRE_ROLE_ID]: '⭐',
+  [ROOKIE_ROLE_ID]: '🌱'
+};
+
+const KNOWN_EMOJIS_PREFIX = Object.values(RANK_ROLE_TO_EMOJI).filter(Boolean);
+
+function stripKnownEmojiPrefix(name) {
+  if (!name) return '';
+  let trimmed = name.trim();
+  for (const emoji of KNOWN_EMOJIS_PREFIX) {
+    if (trimmed.startsWith(emoji + ' ')) return trimmed.slice((emoji + ' ').length).trim();
+    if (trimmed.startsWith(emoji)) return trimmed.slice(emoji.length).trim();
+  }
+  return trimmed;
+}
+
+export async function applyRankEmojiToNickname(member) {
+  try {
+    if (!member || !member.manageable || !member.guild) return;
+    // Determine highest rank present on the member based on rankThresholds order
+    let desiredEmoji = null;
+    for (const { roleId } of rankThresholds) {
+      if (roleId && member.roles.cache.has(roleId)) {
+        desiredEmoji = RANK_ROLE_TO_EMOJI[roleId] ?? null;
+        break;
+      }
+    }
+    // Base name: prefer nickname, fallback to username, but strip any existing known emoji prefix
+    const currentNickname = member.nickname ?? null;
+    const baseName = stripKnownEmojiPrefix(currentNickname ?? member.user?.username ?? '');
+    const newNickname = desiredEmoji ? `${desiredEmoji} ${baseName}` : baseName;
+    // Avoid no-op
+    if ((currentNickname ?? '') === newNickname) return;
+    // Avoid setting empty nickname to null explicitly — Discord treats null as reset
+    if (newNickname.length === 0) return;
+    await member.setNickname(newNickname).catch(() => {});
+  } catch (e) {
+    // Silently ignore to avoid spam; permissions may block nickname edits
+  }
+}
+
 export { ChannelType };
 
 

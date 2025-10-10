@@ -11,6 +11,7 @@ import {
   getUserData,
   logToChannel,
   applyRankRole,
+  applyRankEmojiToNickname,
   buildLeaderboardEmbed,
   publishLeaderboard,
   sendAnalyseRequestButton,
@@ -125,6 +126,8 @@ client.on(Events.GuildMemberAdd, async (member) => {
     saveSoon();
     // Send welcome embed with action buttons in the welcome channel
     await sendMemberWelcome(member.client, member);
+    // Ensure nickname emoji is applied (likely Rookie)
+    await applyRankEmojiToNickname(member);
   } catch (e) {
     console.warn('Failed to handle member join:', e);
   }
@@ -157,7 +160,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
       if (customId === 'start_validation') {
         const modal = new ModalBuilder()
           .setCustomId('validation_modal')
-          .setTitle('Demande d’accès VIP');
+          .setTitle('Demande d\'accès VIP');
         const field1 = new TextInputBuilder()
           .setCustomId('celsius')
           .setLabel('Votre pseudo Celsius')
@@ -168,9 +171,16 @@ client.on(Events.InteractionCreate, async (interaction) => {
           .setLabel('Parrain (si vous en avez un)')
           .setStyle(TextInputStyle.Short)
           .setRequired(false);
+        const field3 = new TextInputBuilder()
+          .setCustomId('email')
+          .setLabel('Votre adresse email')
+          .setStyle(TextInputStyle.Short)
+          .setRequired(true)
+          .setPlaceholder('exemple@email.com');
         const row1 = new ActionRowBuilder().addComponents(field1);
         const row2 = new ActionRowBuilder().addComponents(field2);
-        modal.addComponents(row1, row2);
+        const row3 = new ActionRowBuilder().addComponents(field3);
+        modal.addComponents(row1, row2, row3);
         await interaction.showModal(modal);
         return;
       }
@@ -234,6 +244,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
             if (ROOKIE_ROLE_ID && !member.roles.cache.has(ROOKIE_ROLE_ID)) {
               await member.roles.add(ROOKIE_ROLE_ID).catch(() => {});
             }
+            // Apply emoji to nickname after role update
+            await applyRankEmojiToNickname(member);
             // Initialize user data
             getUserData(member.id);
             saveSoon();
@@ -277,6 +289,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await interaction.deferReply({ ephemeral: true }).catch(() => {});
         const celsius = interaction.fields.getTextInputValue('celsius');
         const sponsor = interaction.fields.getTextInputValue('sponsor');
+        const email = interaction.fields.getTextInputValue('email');
         // Build embed for staff validation
         const embed = new EmbedBuilder()
           .setTitle('Nouvelle demande VIP')
@@ -284,7 +297,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
           .addFields(
             { name: 'Utilisateur', value: `<@${interaction.user.id}> (${interaction.user.tag})` },
             { name: 'Pseudo Celsius', value: celsius },
-            { name: 'Parrain', value: sponsor && sponsor.trim().length > 0 ? sponsor : 'Aucun' }
+            { name: 'Parrain', value: sponsor && sponsor.trim().length > 0 ? sponsor : 'Aucun' },
+            { name: 'Adresse email', value: email }
           )
           .setTimestamp(new Date());
         // Create action buttons for staff
@@ -311,6 +325,16 @@ client.on(Events.InteractionCreate, async (interaction) => {
       }
     }
   }
+});
+
+// When a member's roles change, re-apply the rank emoji on nickname
+client.on(Events.GuildMemberUpdate, async (oldMember, newMember) => {
+  try {
+    // Only act if roles changed
+    if (oldMember.roles.cache.size !== newMember.roles.cache.size || !oldMember.roles.cache.equals(newMember.roles.cache)) {
+      await applyRankEmojiToNickname(newMember);
+    }
+  } catch {}
 });
 
 // Log the bot in
