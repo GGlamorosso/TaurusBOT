@@ -212,19 +212,17 @@ export async function sendWelcomeButtons(client) {
     const embed = new EmbedBuilder()
       .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
       .setDescription(
-        "🔥 Ici, tu ne regardes plus les autres gagner… tu gagnes avec eux.\n\n" +
+        "🔥 Débloque le reste du serveur et mes pronos VIP\n\n" +
         "En devenant membre VIP, tu débloques :\n\n" +
         "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
         "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout… un bonus de bienvenue exceptionnel grâce à notre partenaire Celsius 💥\n\n" +
+        "✅ Et surtout ton bonus de bienvenue \n\n" +
         "🎁 Tes avantages immédiats avec Celsius\n" +
-        "💸 50 % de ton premier dépôt offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
-        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n" +
-        "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
+        "💸 50 % de ton premier dépôts offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
+        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n\n" +
         "🚀 Comment devenir VIP\n" +
-        "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
-        "👉 💠 Découvre Celsius et deviens VIP\n" +
-        "2️⃣ Dépose en passant par, Lien affilié Celsius, clique sur \"J'ai déposé\"\n" +
+        "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
+        "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
         "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
       )
@@ -260,18 +258,16 @@ export async function sendMemberWelcome(client, member) {
     const embed = new EmbedBuilder()
       .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
       .setDescription(
-        "🔥 Ici, tu ne regardes plus les autres gagner… tu gagnes avec eux.\n\n" +
+        "🔥 Débloque le reste du serveur et mes pronos VIP\n\n" +
         "En devenant membre VIP, tu débloques :\n\n" +
         "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
         "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout… un bonus de bienvenue exceptionnel grâce à notre partenaire Celsius 💥\n\n" +
+        "✅ Et surtout ton bonus de bienvenue \n\n" +
         "🎁 Tes avantages immédiats avec Celsius\n" +
-        "💸 50 % de ton premier dépôt offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
-        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n" +
-        "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
+        "💸 50 % de ton premier dépôts offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
+        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n\n" +
         "🚀 Comment devenir VIP\n" +
-        "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
-        "👉 💠 Découvrir Celsius et deviens VIP\n" +
+        "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
         "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
         "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
