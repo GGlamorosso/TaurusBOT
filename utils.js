@@ -223,7 +223,7 @@ export async function sendWelcomeButtons(client) {
         "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
         "🚀 Comment devenir VIP\n" +
         "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
-        "👉 💠 Découvrir #🎰｜celsius et deviens VIP\n" +
+        "👉 💠 Découvre Celsius et deviens VIP\n" +
         "2️⃣ Dépose en passant par, Lien affilié Celsius, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
         "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
@@ -271,7 +271,7 @@ export async function sendMemberWelcome(client, member) {
         "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
         "🚀 Comment devenir VIP\n" +
         "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
-        "👉 💠 Découvrir #🎰｜celsius et deviens VIP\n" +
+        "👉 💠 Découvrir Celsius et deviens VIP\n" +
         "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
         "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
