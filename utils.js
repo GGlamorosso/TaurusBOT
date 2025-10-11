@@ -210,22 +210,23 @@ export async function sendWelcomeButtons(client) {
     const channel = await client.channels.fetch(WELCOME_CHANNEL_ID).catch(() => null);
     if (!channel) return;
     const embed = new EmbedBuilder()
-      .setTitle('Bienvenue dans la Betting School 👋')
+      .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
       .setDescription(
-        'Ici, tu profites de :\n' +
-        '• Analyses & conseils privés\n' +
-        '• Outils et salons exclusifs\n' +
-        '• Récompenses grâce à tes LP (points)\n\n' +
-        'Bonus de bienvenue (1er dépôt) :\n' +
-        '• 50% de freebets offerts jusqu’à 200€\n' +
-        '• Exemple : tu déposes 200€ → 100€ de freebets immédiatement + 200 LP\n\n' +
-        'Notre partenaire Celsius nous permet d’offrir les meilleurs avantages aux membres.\n' +
-        'Comment ça marche ?\n\n' +
-        'Dépose via le bouton Lien affilié\n' +
-        'Clique J’ai déposé\n' +
-        'Plus tu déposes, plus tu gagnes de LP → bonus exclusifs\n' +
-        'Dès 100 LP : on t’envoie un maillot de foot exclusif.\n\n' +
-        'Besoin d’aide ? Clique Aide.'
+        "🔥 Ici, tu ne regardes plus les autres gagner… tu gagnes avec eux.\n\n" +
+        "En devenant membre VIP, tu débloques :\n\n" +
+        "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
+        "✅ Des avantages réservés aux initiés\n" +
+        "✅ Et surtout… un bonus de bienvenue exceptionnel grâce à notre partenaire Celsius 💥\n\n" +
+        "🎁 Tes avantages immédiats avec Celsius\n" +
+        "💸 50 % de ton premier dépôt offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
+        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n" +
+        "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
+        "🚀 Comment devenir VIP\n" +
+        "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
+        "👉 💠 Découvrir #🎰｜celsius et deviens VIP\n" +
+        "2️⃣ Dépose en passant par, Lien affilié Celsius, clique sur \"J'ai déposé\"\n" +
+        "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
+        "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
       )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
@@ -257,22 +258,23 @@ export async function sendMemberWelcome(client, member) {
     const channel = await client.channels.fetch(WELCOME_CHANNEL_ID).catch(() => null);
     if (!channel) return;
     const embed = new EmbedBuilder()
-      .setTitle('Bienvenue dans la Betting School 👋')
+      .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
       .setDescription(
-        'Ici, tu profites de :\n' +
-        '• Analyses & conseils privés\n' +
-        '• Outils et salons exclusifs\n' +
-        '• Récompenses grâce à tes LP (points)\n\n' +
-        'Bonus de bienvenue (1er dépôt) :\n' +
-        '• 50% de freebets offerts jusqu’à 200€\n' +
-        '• Exemple : tu déposes 200€ → 100€ de freebets immédiatement + 200 LP\n\n' +
-        'Notre partenaire Celsius nous permet d’offrir les meilleurs avantages aux membres.\n' +
-        'Comment ça marche ?\n\n' +
-        'Dépose via le bouton Lien affilié\n' +
-        'Clique J’ai déposé\n' +
-        'Plus tu déposes, plus tu gagnes de LP → bonus exclusifs\n' +
-        'Dès 100 LP : on t’envoie un maillot de foot exclusif.\n\n' +
-        'Besoin d’aide ? Clique Aide.'
+        "🔥 Ici, tu ne regardes plus les autres gagner… tu gagnes avec eux.\n\n" +
+        "En devenant membre VIP, tu débloques :\n\n" +
+        "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
+        "✅ Des avantages réservés aux initiés\n" +
+        "✅ Et surtout… un bonus de bienvenue exceptionnel grâce à notre partenaire Celsius 💥\n\n" +
+        "🎁 Tes avantages immédiats avec Celsius\n" +
+        "💸 50 % de ton premier dépôt offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
+        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n" +
+        "🎯 Des récompenses exclusives via ton programme de points LP\n\n" +
+        "🚀 Comment devenir VIP\n" +
+        "1️⃣ Clique ici pour découvrir tous les avantages et rejoindre notre partenaire officiel 👇\n" +
+        "👉 💠 Découvrir #🎰｜celsius et deviens VIP\n" +
+        "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
+        "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
+        "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
       )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
