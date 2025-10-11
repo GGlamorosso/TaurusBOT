@@ -216,15 +216,13 @@ export async function sendWelcomeButtons(client) {
         "En devenant membre VIP, tu débloques :\n\n" +
         "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
         "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout ton bonus de bienvenue \n\n" +
-        "🎁 Tes avantages immédiats avec Celsius\n" +
-        "💸 50 % de ton premier dépôts offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
-        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n\n" +
+        "✅ Et surtout découvre tes avantages sur le salon #celsius \n\n" +
+
         "🚀 Comment devenir VIP\n" +
         "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
         "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
-        "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
+        "💬 TaurusBet School — Viens échanger avec les autres membres."
       )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
@@ -262,15 +260,13 @@ export async function sendMemberWelcome(client, member) {
         "En devenant membre VIP, tu débloques :\n\n" +
         "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
         "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout ton bonus de bienvenue \n\n" +
-        "🎁 Tes avantages immédiats avec Celsius\n" +
-        "💸 50 % de ton premier dépôts offerts en freebets ( ex : 100€ offert si 200€ dépot )\n" +
-        "⚽ 1 maillot de foot offert dès 100 € de dépôt\n\n" +
+        "✅ Et surtout découvre tes avantages sur le salon #celsius \n\n" +
+
         "🚀 Comment devenir VIP\n" +
         "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
         "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
-        "💬 NoSchoolNoBet — La seule école où parier devient un vrai plan."
+        "💬 TaurusBet School — Viens échanger avec les autres membres."
       )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
