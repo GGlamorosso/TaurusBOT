@@ -15,6 +15,7 @@ import {
   buildLeaderboardEmbed,
   publishLeaderboard,
   sendAnalyseRequestButton,
+  sendSupportTicketButton,
   sendWelcomeButtons,
   sendMemberWelcome,
   DATA,
@@ -36,6 +37,7 @@ const {
   ANALYSE_REQUEST_CHANNEL_ID,
   CLASSEMENT_CHANNEL_ID,
   BOT_LOGS_CHANNEL_ID,
+  SUPPORT_CHANNEL_ID,
   NONVIA_ROLE_ID,
   ROOKIE_ROLE_ID,
   STAFF_ROLE_ID,
@@ -108,9 +110,10 @@ client.once(Events.ClientReady, async () => {
   }
   // Register slash commands
   await registerSlashCommands(client, client.commands ?? new Map());
-  // Send welcome and analysis buttons
+  // Send welcome, analysis and support buttons
   await sendWelcomeButtons(client);
   await sendAnalyseRequestButton(client);
+  await sendSupportTicketButton(client);
 });
 
 /**
@@ -202,7 +205,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
           name: `ticket-${interaction.user.username}-${Date.now()}`,
           autoArchiveDuration: 10080,
           type: ChannelType.PrivateThread,
-          reason: 'Ticket d’analyse demandé'
+          reason: 'Ticket d\'analyse demandé'
         }).catch(() => null);
         if (!thread) {
           await interaction.followUp({ content: 'Impossible de créer le ticket. Vérifiez mes permissions.', flags: 64 });
@@ -221,9 +224,44 @@ client.on(Events.InteractionCreate, async (interaction) => {
         } catch {
           // ignore
         }
-        await thread.send({ content: `👋 <@${interaction.user.id}> ticket  d’analyse ouvert\nMerci de préciser ta requête\nUn membre du staff te répondra sous peu.\n(Le ticket s’archive automatiquement après 7 jours d’inactivité)`, allowedMentions: { users: [interaction.user.id] } });
-        await interaction.followUp({ content: `🎫 Votre ticket a été créé : <#${thread.id}>`, flags: 64 });
-        await logToChannel(client, `🎫 Ticket d’analyse créé par ${interaction.user.tag} (#${thread.id}).`);
+        await thread.send({ content: `👋 <@${interaction.user.id}> ticket d\'analyse ouvert\nMerci de préciser ta requête\nUn membre du staff te répondra sous peu.\n(Le ticket s\'archive automatiquement après 7 jours d\'inactivité)`, allowedMentions: { users: [interaction.user.id] } });
+        await interaction.followUp({ content: `🎫 Votre ticket a été créé : <#${thread.id}>`, flags: 64 });
+        await logToChannel(client, `🎫 Ticket d\'analyse créé par ${interaction.user.tag} (#${thread.id}).`);
+        return;
+      }
+      // 'open_support_ticket' creates a private thread for support
+      if (customId === 'open_support_ticket') {
+        // Create private thread
+        const channel = interaction.channel;
+        if (!channel || channel.type !== ChannelType.GuildText) {
+          return;
+        }
+        const thread = await channel.threads.create({
+          name: `support-${interaction.user.username}-${Date.now()}`,
+          autoArchiveDuration: 10080,
+          type: ChannelType.PrivateThread,
+          reason: 'Ticket de support demandé'
+        }).catch(() => null);
+        if (!thread) {
+          await interaction.followUp({ content: 'Impossible de créer le ticket. Vérifiez mes permissions.', flags: 64 });
+          return;
+        }
+        // Add the requesting user
+        await thread.members.add(interaction.user.id).catch(() => {});
+        // Add all staff members to the thread
+        try {
+          const staffRole = interaction.guild.roles.cache.get(STAFF_ROLE_ID);
+          if (staffRole) {
+            for (const [id] of staffRole.members) {
+              await thread.members.add(id).catch(() => {});
+            }
+          }
+        } catch {
+          // ignore
+        }
+        await thread.send({ content: `👋 <@${interaction.user.id}> ticket de support ouvert\nDécris ton problème et un membre du staff te répondra sous peu.\n(Le ticket s\'archive automatiquement après 7 jours d\'inactivité)`, allowedMentions: { users: [interaction.user.id] } });
+        await interaction.followUp({ content: `🎫 Votre ticket de support a été créé : <#${thread.id}>`, flags: 64 });
+        await logToChannel(client, `🎫 Ticket de support créé par ${interaction.user.tag} (#${thread.id}).`);
         return;
       }
       // Buttons prefixed with "validate_" come from staff validation embeds

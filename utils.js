@@ -15,6 +15,7 @@ const {
   ANALYSE_REQUEST_CHANNEL_ID,
   CLASSEMENT_CHANNEL_ID,
   BOT_LOGS_CHANNEL_ID,
+  SUPPORT_CHANNEL_ID,
   NONVIA_ROLE_ID,
   ROOKIE_ROLE_ID,
   STAFF_ROLE_ID,
@@ -37,6 +38,7 @@ export function getConfig() {
     ANALYSE_REQUEST_CHANNEL_ID,
     CLASSEMENT_CHANNEL_ID,
     BOT_LOGS_CHANNEL_ID,
+    SUPPORT_CHANNEL_ID,
     NONVIA_ROLE_ID,
     ROOKIE_ROLE_ID,
     STAFF_ROLE_ID,
@@ -196,11 +198,30 @@ export async function sendAnalyseRequestButton(client) {
       .setStyle(ButtonStyle.Primary);
     const row = new ActionRowBuilder().addComponents(button);
     await channel.send({
-      content: 'Cliquez sur le bouton ci-dessous pour ouvrir un ticket d’analyse privé avec le staff.',
+      content: 'Cliquez sur le bouton ci-dessous pour ouvrir un ticket d\'analyse privé avec le staff.',
       components: [row]
     });
   } catch (e) {
     console.warn('Failed to send analysis request button:', e);
+  }
+}
+
+export async function sendSupportTicketButton(client) {
+  if (!SUPPORT_CHANNEL_ID) return;
+  try {
+    const channel = await client.channels.fetch(SUPPORT_CHANNEL_ID).catch(() => null);
+    if (!channel) return;
+    const button = new ButtonBuilder()
+      .setCustomId('open_support_ticket')
+      .setLabel('🎫 Ouvrir un ticket')
+      .setStyle(ButtonStyle.Primary);
+    const row = new ActionRowBuilder().addComponents(button);
+    await channel.send({
+      content: '**Besoin d\'aide ? Ouvre un ticket en dessous**',
+      components: [row]
+    });
+  } catch (e) {
+    console.warn('Failed to send support ticket button:', e);
   }
 }
 
@@ -210,20 +231,16 @@ export async function sendWelcomeButtons(client) {
     const channel = await client.channels.fetch(WELCOME_CHANNEL_ID).catch(() => null);
     if (!channel) return;
     const embed = new EmbedBuilder()
-      .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
-      .setDescription(
-        "🔥 Débloque le reste du serveur et mes pronos VIP\n\n" +
-        "En devenant membre VIP, tu débloques :\n\n" +
-        "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
-        "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout découvre tes avantages sur le salon #celsius \n\n" +
-
-        "🚀 Comment devenir VIP\n" +
-        "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
-        "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
-        "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
-        "💬 TaurusBet School — Viens échanger avec les autres membres."
-      )
+    .setTitle("💎 Rejoins le VIP Taurus dès aujourd'hui !")
+    .setDescription(
+      "🔥 Débloque le reste du serveur et mes pronos VIP\n\n" +
+      "En 5 minutes rejoins le reste de la communauté et débloque tes avantages:\n\n" +
+      "✅ Salon VIP\n" +
+      "✅ Salon discussion\n" +
+      "✅ Salon analyse personnalisée\n\n" +
+      "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
+      "💬 TaurusBet School — Viens encaisser avec la Team."
+    )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
       .setStyle(ButtonStyle.Link)
@@ -254,19 +271,15 @@ export async function sendMemberWelcome(client, member) {
     const channel = await client.channels.fetch(WELCOME_CHANNEL_ID).catch(() => null);
     if (!channel) return;
     const embed = new EmbedBuilder()
-      .setTitle("💎 Rejoins la Betting School dès aujourd'hui !")
+      .setTitle("💎 Rejoins le VIP Taurus dès aujourd'hui !")
       .setDescription(
         "🔥 Débloque le reste du serveur et mes pronos VIP\n\n" +
-        "En devenant membre VIP, tu débloques :\n\n" +
-        "✅ L'accès à tous nos salons exclusifs (analyses, outils, stratégies avancées)\n" +
-        "✅ Des avantages réservés aux initiés\n" +
-        "✅ Et surtout découvre tes avantages sur le salon #celsius \n\n" +
-
-        "🚀 Comment devenir VIP\n" +
-        "1️⃣ Déouvre tes avantages avec notre partenaire sur le salon Celsius 👇\n" +
-        "2️⃣ Une fois ton dépôt effectué, clique sur \"J'ai déposé\"\n" +
+        "En 5 minutes rejoins le reste de la communauté et débloque tes avantages:\n\n" +
+        "✅ Salon VIP\n" +
+        "✅ Salon discussion\n" +
+        "✅ Salon analyse personnalisée\n\n" +
         "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
-        "💬 TaurusBet School — Viens échanger avec les autres membres."
+        "💬 TaurusBet School — Viens encaisser avec la Team."
       )
       .setColor(14290703);
     const affiliateBtn = new ButtonBuilder()
