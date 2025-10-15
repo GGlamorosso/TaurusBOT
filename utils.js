@@ -238,7 +238,7 @@ export async function sendWelcomeButtons(client) {
       "✅ Salon VIP\n" +
       "✅ Salon discussion\n" +
       "✅ Salon analyse personnalisée\n\n" +
-      "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
+      " Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
       "💬 TaurusBet School — Viens encaisser avec la Team."
     )
       .setColor(14290703);
@@ -278,7 +278,7 @@ export async function sendMemberWelcome(client, member) {
         "✅ Salon VIP\n" +
         "✅ Salon discussion\n" +
         "✅ Salon analyse personnalisée\n\n" +
-        "3️⃣ Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
+        " Notre équipe validera ta demande d'adhésion VIP rapidement ✅\n\n" +
         "💬 TaurusBet School — Viens encaisser avec la Team."
       )
       .setColor(14290703);
